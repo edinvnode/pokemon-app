@@ -36,7 +36,7 @@ function App() {
           />
         ))}
       </div>
-      <PokemonList />
+      <PokemonList data={data} />
     </div>
   );
 }

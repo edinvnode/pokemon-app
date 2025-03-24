@@ -66,6 +66,41 @@ form {
   font-weight: bold;
 }
 
+.pokemon-field {
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 10px;
+  background-color: aqua;
+}
+
+.pokemon-fight {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 300px;
+}
+
+.pokemon-comments {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.pokemon-comment {
+  margin: 0 auto;
+  font-size: 32px;
+  border: 1px solid black;
+  width: 100vw;
+  text-align: center;
+}
+
+.selected-pokemon {
+  font-weight: bold;
+  font-size: 16px;
+  color: green;
+}
+
 @media (max-width: 600px) {
   .container {
     width: 90%;
