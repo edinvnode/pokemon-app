@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PokemonCard from './PokemonCard';
 
 function PokemonList({ data }) {
-  const [selectedPokemon, setSelectedPokemon] = useState('Pikachu');
+  const [selectedPokemon, setSelectedPokemon] = useState('');
   const [loading, setLoading] = useState(false);
   const [health1, setHealth1] = useState(100);
   const [health2, setHealth2] = useState(100);
@@ -25,13 +25,19 @@ function PokemonList({ data }) {
   // Get the image URL (fallback to empty string if not found)
   const selectedPokemonImage = selectedPokemonData?.image || '';
 
-  //select pokemon and start the fight
+  useEffect(() => {
+    if (loading) {
+      battle();
+    }
+  }, [randomPokemonIdx]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    //alert(selectedPokemon);
-    setRandomPokemonIdx(Math.floor(Math.random() * namesArr.length));
     setLoading(true);
-    battle();
+
+    // Generate a new random index and update state
+    const newIdx = Math.floor(Math.random() * namesArr.length);
+    setRandomPokemonIdx(newIdx);
   };
 
   //this function calculates the battle points of pokemons
@@ -108,7 +114,9 @@ function PokemonList({ data }) {
         </form>
 
         <p className="selected-pokemon">
-          You selected pokemon: {selectedPokemon}
+          {selectedPokemon
+            ? `You selected pokemon: ${selectedPokemon}`
+            : 'Please select your pokemon'}
         </p>
         <p className="selected-pokemon">
           You random pokemon: {namesArr[randomPokemonIdx]}
