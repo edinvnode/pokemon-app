@@ -4,16 +4,18 @@ import PokemonCard from './PokemonCard';
 
 function PokemonList({ data }) {
   const [selectedPokemon, setSelectedPokemon] = useState('Pikachu');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [health1, setHealth1] = useState(100);
   const [health2, setHealth2] = useState(100);
   const [comment, setComment] = useState('Fight is about to begin.');
+
   //form arrays for random pokeomon
   const namesArr = data.map((item) => item.name);
   const imagesArr = data.map((item) => item.image);
 
-  //form random array position for random pokemon
-  let raddomPokemonIdx = Math.floor(Math.random() * namesArr.length);
+  const [randomPokemonIdx, setRandomPokemonIdx] = useState(
+    Math.floor(Math.random() * namesArr.length)
+  );
 
   // Find the selected Pokémon in the data array
   const selectedPokemonData = data.find(
@@ -23,16 +25,12 @@ function PokemonList({ data }) {
   // Get the image URL (fallback to empty string if not found)
   const selectedPokemonImage = selectedPokemonData?.image || '';
 
-  //get random pokeomon from data object
-  const getRandomPokemon = (data) => {
-    const randomIndex = Math.floor(Math.random() * data.length);
-    //alert(data[randomIndex]);
-    return data[randomIndex];
-  };
-
+  //select pokemon and start the fight
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(selectedPokemon);
+    //alert(selectedPokemon);
+    setRandomPokemonIdx(Math.floor(Math.random() * namesArr.length));
+    setLoading(true);
     battle();
   };
 
@@ -41,49 +39,48 @@ function PokemonList({ data }) {
     let hp1 = 100;
     let hp2 = 100;
 
-    while (health1 > 0 || health2 > 0) {
-      let randomHit1 = Math.floor(Math.random() * 25);
-
-      setComment(
-        selectedPokemon + ' attacks with power of ' + randomHit1 + ' points'
-      );
-
-      hp1 = hp1 - randomHit1;
-
-      setHealth1(hp1);
-      alert(hp1);
-
-      if (hp1 <= 0) {
-        hp1 = 0;
-        setComment(selectedPokemon + ' wins!!!');
+    const fightTurn = () => {
+      if (hp1 <= 0 || hp2 <= 0) {
+        return; // Stop battle if a Pokémon has fainted
       }
 
-      setTimeout(() => {
-        setComment('Waited 1 second!');
-      }, 1000);
-
+      let randomHit1 = Math.floor(Math.random() * 25);
       let randomHit2 = Math.floor(Math.random() * 25);
 
-      setComment(
-        namesArr[raddomPokemonIdx] +
-          ' attacks with power of ' +
-          randomHit2 +
-          ' points'
-      );
+      // Calculate new health values
+      hp1 = Math.max(hp1 - randomHit1, 0);
+      hp2 = Math.max(hp2 - randomHit2, 0);
 
-      hp2 = hp2 - randomHit2;
-
+      // Update state with new health values
+      setHealth1(hp1);
       setHealth2(hp2);
 
-      if (health2 <= 0) {
-        health2 = 0;
-        setComment(namesArr[raddomPokemonIdx] + ' wins!!!');
-      }
+      // Announce first attack
+      setComment(`${selectedPokemon} attacks with power of ${randomHit1}!`);
 
       setTimeout(() => {
-        setComment('Waited 1 second!');
+        if (hp2 <= 0) {
+          setComment(`${selectedPokemon} wins!!!`);
+          return; // Stop further execution
+        }
+
+        // Announce second attack
+        setComment(
+          `${namesArr[randomPokemonIdx]} attacks with power of ${randomHit2}!`
+        );
+
+        setTimeout(() => {
+          if (hp1 <= 0) {
+            setComment(`${namesArr[randomPokemonIdx]} wins!!!`);
+            return; // Stop further execution
+          }
+
+          fightTurn(); // Continue battle if both Pokémon still have HP
+        }, 1000);
       }, 1000);
-    } //end of while loop
+    };
+
+    fightTurn();
   };
 
   return (
@@ -114,7 +111,7 @@ function PokemonList({ data }) {
           You selected pokemon: {selectedPokemon}
         </p>
         <p className="selected-pokemon">
-          You random pokemon: {namesArr[raddomPokemonIdx]}
+          You random pokemon: {namesArr[randomPokemonIdx]}
         </p>
       </div>
 
@@ -127,8 +124,8 @@ function PokemonList({ data }) {
               src="https://as1.ftcdn.net/jpg/02/97/19/88/1000_F_297198830_S54w7aKIcUNpL1DNto47SJUc7A9SDh9W.jpg"
             />
             <PokemonCard
-              name={namesArr[raddomPokemonIdx]}
-              image={imagesArr[raddomPokemonIdx]}
+              name={namesArr[randomPokemonIdx]}
+              image={imagesArr[randomPokemonIdx]}
             />
           </div>
           <div className="pokemon-comments">
