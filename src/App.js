@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Pokemon App</h1>
+      <h1>Pokemon Battle App</h1>
       <div className="container">
         {data.map((pokemon) => (
           <PokemonCard

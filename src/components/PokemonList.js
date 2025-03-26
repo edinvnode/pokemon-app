@@ -159,9 +159,13 @@ function PokemonList({ data }) {
           </div>
 
           <div className="pokemon-comments">
-            <p className="pokemon-comment">{health1}</p>
+            <p className="pokemon-comment">
+              {`${selectedPokemon} hit points ${health1}`}
+            </p>
             <p className="pokemon-comment">{comment}</p>
-            <p className="pokemon-comment">{health2}</p>
+            <p className="pokemon-comment">
+              {`${namesArr[randomPokemonIdx]} hit points ${health2}`}
+            </p>
           </div>
         </div>
       )}
