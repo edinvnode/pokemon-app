@@ -100,9 +100,11 @@ function PokemonList({ data }) {
               setSelectedPokemon(e.target.options[e.target.selectedIndex].text);
             }}
           >
-            <option value="pikachu">Pikachu</option>
-            <option value="bulbasaur">Bulbasaur</option>
-            <option value="charmander">Charmander</option>
+            {data.map((pokemon) => (
+              <option value={pokemon.name.toLowerCase()}>
+                {pokemon.name}{' '}
+              </option>
+            ))}
           </select>
           <button
             type="submit"

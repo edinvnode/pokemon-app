@@ -9,8 +9,7 @@ function App() {
     {
       id: 1,
       name: 'Pikachu',
-      image:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWdB7iiUbqK-acM9qMYdewtVr97sGQNtmlkOLRg87dWU5lecvX-pRVtfpnneH2JQ_r0xI&usqp=CAU',
+      image: 'https://img.pokemondb.net/artwork/avif/pikachu.avif',
     },
     {
       id: 2,
@@ -21,6 +20,37 @@ function App() {
       id: 3,
       name: 'Charmander',
       image: 'https://assets.pokemon.com/assets/cms2/img/pokedex/full//004.png',
+    },
+    {
+      id: 4,
+      name: 'Squirtle',
+      image:
+        'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/007.png',
+    },
+    {
+      id: 5,
+      name: 'Pidgeot',
+      image: 'https://dextraneous.blog/wp-content/uploads/2019/08/016.png',
+    },
+    {
+      id: 6,
+      name: 'Rattata',
+      image: 'https://img.pokemondb.net/artwork/avif/rattata.avif',
+    },
+    {
+      id: 7,
+      name: 'Butterfree',
+      image: 'https://img.pokemondb.net/artwork/avif/butterfree.avif',
+    },
+    {
+      id: 8,
+      name: 'Ekens',
+      image: 'https://img.pokemondb.net/artwork/avif/ekans.avif',
+    },
+    {
+      id: 9,
+      name: 'Vulpix',
+      image: 'https://img.pokemondb.net/artwork/avif/vulpix.avif',
     },
   ];
 

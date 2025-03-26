@@ -11,16 +11,17 @@ body {
 }
 
 .container {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px;
   justify-content: center;
   align-items: center;
-  width: 1000px;
+  width: 900px;
   margin: 0 auto;
 }
 
 img {
-  width: 200px;
+  width: 150px;
   height: auto;
 }
 
