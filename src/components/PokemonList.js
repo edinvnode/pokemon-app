@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PokemonCard from './PokemonCard';
 
 function PokemonList({ data }) {
-  const [selectedPokemon, setSelectedPokemon] = useState('');
+  const [selectedPokemon, setSelectedPokemon] = useState('Pikachu');
   const [loading, setLoading] = useState(false);
   const [restartBattle, setRestartBattle] = useState(false);
   const [health1, setHealth1] = useState(100);
@@ -108,11 +108,13 @@ function PokemonList({ data }) {
             className="pokemons"
             value={selectedPokemon}
             onChange={(e) => {
-              setSelectedPokemon(e.target.options[e.target.selectedIndex].text);
+              const newSelection = e.target.value;
+              setSelectedPokemon(''); // Reset first
+              setTimeout(() => setSelectedPokemon(newSelection), 0); // Then update
             }}
           >
             {data.map((pokemon) => (
-              <option key={pokemon.name} value={pokemon.name.toLowerCase()}>
+              <option key={pokemon.name} value={pokemon.name}>
                 {pokemon.name}
               </option>
             ))}
