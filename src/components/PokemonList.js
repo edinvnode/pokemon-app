@@ -5,6 +5,7 @@ import PokemonCard from './PokemonCard';
 function PokemonList({ data }) {
   const [selectedPokemon, setSelectedPokemon] = useState('');
   const [loading, setLoading] = useState(false);
+  const [restartBattle, setRestartBattle] = useState(false);
   const [health1, setHealth1] = useState(100);
   const [health2, setHealth2] = useState(100);
   const [comment, setComment] = useState('Fight is about to begin.');
@@ -38,6 +39,13 @@ function PokemonList({ data }) {
     // Generate a new random index and update state
     const newIdx = Math.floor(Math.random() * namesArr.length);
     setRandomPokemonIdx(newIdx);
+    //setRestartBattle(true);
+  };
+
+  const handleRestart = () => {
+    setLoading(false);
+    setRestartBattle(false);
+    setSelectedPokemon('');
   };
 
   //this function calculates the battle points of pokemons
@@ -67,6 +75,7 @@ function PokemonList({ data }) {
       setTimeout(() => {
         if (hp2 <= 0) {
           setComment(`${selectedPokemon} wins!!!`);
+          setRestartBattle(true);
           return; // Stop further execution
         }
 
@@ -78,6 +87,7 @@ function PokemonList({ data }) {
         setTimeout(() => {
           if (hp1 <= 0) {
             setComment(`${namesArr[randomPokemonIdx]} wins!!!`);
+            setRestartBattle(true);
             return; // Stop further execution
           }
 
@@ -96,13 +106,14 @@ function PokemonList({ data }) {
         <form>
           <select
             className="pokemons"
+            value={selectedPokemon}
             onChange={(e) => {
               setSelectedPokemon(e.target.options[e.target.selectedIndex].text);
             }}
           >
             {data.map((pokemon) => (
-              <option value={pokemon.name.toLowerCase()}>
-                {pokemon.name}{' '}
+              <option key={pokemon.name} value={pokemon.name.toLowerCase()}>
+                {pokemon.name}
               </option>
             ))}
           </select>
@@ -124,7 +135,13 @@ function PokemonList({ data }) {
           You random pokemon: {namesArr[randomPokemonIdx]}
         </p>
       </div>
-
+      {restartBattle && (
+        <div className="restart-battle">
+          <button className="restart-button" onClick={handleRestart}>
+            Restart Battle
+          </button>
+        </div>
+      )}
       {loading && (
         <div className="pokemon-field">
           <div className="pokemon-fight">
@@ -138,6 +155,7 @@ function PokemonList({ data }) {
               image={imagesArr[randomPokemonIdx]}
             />
           </div>
+
           <div className="pokemon-comments">
             <p className="pokemon-comment">{health1}</p>
             <p className="pokemon-comment">{comment}</p>
