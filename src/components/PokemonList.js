@@ -45,7 +45,7 @@ function PokemonList({ data }) {
   const handleRestart = () => {
     setLoading(false);
     setRestartBattle(false);
-    setSelectedPokemon('');
+    setSelectedPokemon('Pikachu');
   };
 
   //this function calculates the battle points of pokemons
@@ -150,7 +150,7 @@ function PokemonList({ data }) {
             <PokemonCard name={selectedPokemon} image={selectedPokemonImage} />
             <img
               alt="vs battle image"
-              src="https://as1.ftcdn.net/jpg/02/97/19/88/1000_F_297198830_S54w7aKIcUNpL1DNto47SJUc7A9SDh9W.jpg"
+              src="https://static.vecteezy.com/system/resources/thumbnails/028/824/564/small/vs-letters-versus-png.png"
             />
             <PokemonCard
               name={namesArr[randomPokemonIdx]}
