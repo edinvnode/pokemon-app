@@ -5,6 +5,7 @@ function PokemonList({ data }) {
   const [selectedPokemon, setSelectedPokemon] = useState('Pikachu');
   const [loading, setLoading] = useState(false);
   const [restartBattle, setRestartBattle] = useState(false);
+  const [selectEnable, setSelectEnable] = useState(false);
   const [health1, setHealth1] = useState(100);
   const [health2, setHealth2] = useState(100);
   const [comment, setComment] = useState('Fight is about to begin.');
@@ -39,6 +40,7 @@ function PokemonList({ data }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setSelectEnable(true);
     const newIdx = Math.floor(Math.random() * namesArr.length);
     setRandomPokemonIdx(newIdx);
   };
@@ -47,6 +49,7 @@ function PokemonList({ data }) {
     setLoading(false);
     setRestartBattle(false);
     setSelectedPokemon('Pikachu');
+    setSelectEnable(true);
   };
 
   const battle = () => {
@@ -100,6 +103,7 @@ function PokemonList({ data }) {
           <select
             className="pokemons"
             value={selectedPokemon}
+            disabled={selectEnable}
             onChange={(e) => {
               const newSelection = e.target.value;
               setSelectedPokemon('');
@@ -116,6 +120,7 @@ function PokemonList({ data }) {
             type="submit"
             className="submit-button"
             onClick={handleSubmit}
+            disabled={selectEnable}
           >
             Select
           </button>
