@@ -49,7 +49,7 @@ function PokemonList({ data }) {
     setLoading(false);
     setRestartBattle(false);
     setSelectedPokemon('Pikachu');
-    setSelectEnable(true);
+    setSelectEnable(false);
   };
 
   const battle = () => {
