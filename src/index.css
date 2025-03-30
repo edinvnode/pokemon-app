@@ -103,6 +103,10 @@ form {
   text-align: center;
 }
 
+.disable-message {
+  color: red;
+}
+
 .selected-pokemon {
   font-weight: bold;
   font-size: 16px;

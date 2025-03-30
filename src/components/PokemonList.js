@@ -125,6 +125,11 @@ function PokemonList({ data }) {
             Select
           </button>
         </form>
+        {selectEnable && (
+          <p className="disable-message">
+            The select tag and select button are disabled
+          </p>
+        )}
 
         <p className="selected-pokemon">
           {selectedPokemon
