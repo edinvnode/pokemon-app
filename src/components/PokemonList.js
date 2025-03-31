@@ -127,7 +127,8 @@ function PokemonList({ data }) {
         </form>
         {selectEnable && (
           <p className="disable-message">
-            The select tag and select button are disabled
+            The select tag and select button are disabled. Restart battle when
+            button appears.
           </p>
         )}
 
