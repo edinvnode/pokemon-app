@@ -112,6 +112,7 @@ form {
   font-weight: bold;
   font-size: 16px;
   color: green;
+  border: 1px solid green;
 }
 
 .restart-battle {
